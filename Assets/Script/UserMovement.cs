@@ -32,6 +32,7 @@ public partial struct UserMovement : ISystem
             {
                 transform.ValueRW.Position.x += deltaTime * speed;
             }
+
         }
     }
 }

@@ -12,10 +12,8 @@ public partial struct CubeRotation : ISystem {
     public void OnUpdate(ref SystemState state) {
         float deltaTime = SystemAPI.Time.DeltaTime;
         foreach (var (tranform,rotate) in SystemAPI.Query<RefRW<LocalTransform>,RefRW<Rotate>>()) {
-
             
-            
-            if(Mathf.Abs(tranform.ValueRW.Position.x )> 13 )
+            if(Mathf.Abs(tranform.ValueRW.Position.x )> 25 )
             {
                 rotate.ValueRW.speed = -rotate.ValueRW.speed;
             }
