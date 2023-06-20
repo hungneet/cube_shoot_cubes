@@ -4,13 +4,18 @@ using UnityEngine;
 using Unity.Entities;
 using Unity.Burst;
 using System;
-using Unity.Transforms;
+using Unity.Transforms; 
 using Unity.Mathematics;
 using Unity.Collections;
 
+/*public partial struct MovingJob:IJobEntity
+{
+    //void Execute (ref )
+}*/
 public partial struct UserMovement : ISystem
 {
     
+
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
