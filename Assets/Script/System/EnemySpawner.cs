@@ -16,10 +16,14 @@ public partial struct EnemySpawner : ISystem
         Unity.Mathematics.Random random = new Unity.Mathematics.Random(1);
         state.Enabled = false;
         var spawner = SystemAPI.GetSingletonRW<ESpawn>();
-        var enemy = spawner.ValueRW.preFab;
+        var enemy = spawner.ValueRO.preFab;
         var ecb = new EntityCommandBuffer(Allocator.TempJob);
+
+
+       /* var tf = SystemAPI.GetSingletonRW<LocalTransform>();
+        var pos = tf.ValueRO.Position;*/
         //state.EntityManager.SetComponentData()
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < 5; i++)
         {
             var newEnemy = ecb.Instantiate(enemy);
             ecb.SetComponent(newEnemy, new LocalTransform
@@ -28,8 +32,10 @@ public partial struct EnemySpawner : ISystem
                 Rotation = quaternion.identity,
                 Scale = 1f
             });
+            /*EnemySpawn(ecb, enemy);*/
         }
         ecb.Playback(state.EntityManager);
+        ecb.Dispose();
         /*
         float deltaTime = SystemAPI.Time.DeltaTime;
         foreach (var (transform, spawner) in SystemAPI.Query<RefRW<LocalTransform>, RefRW<ESpawn>>())
@@ -54,6 +60,18 @@ public partial struct EnemySpawner : ISystem
 
             }
         }*/
+    }
+    void EnemySpawn(EntityCommandBuffer ecb, Entity enemy)
+    {
+        Unity.Mathematics.Random random = new Unity.Mathematics.Random(1);
+        var newEnemy = ecb.Instantiate(enemy);
+        ecb.SetComponent(newEnemy, new LocalTransform
+        {
+            Position = new float3(random.NextFloat(-15f, 20f), 0, random.NextFloat(-2f, 10f)),
+
+            Rotation = quaternion.identity,
+            Scale = 1f
+        }); 
     }
 
 
