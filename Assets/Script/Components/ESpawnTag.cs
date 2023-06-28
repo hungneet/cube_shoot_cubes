@@ -4,15 +4,17 @@ using UnityEngine;
 public class ESpawnTag : MonoBehaviour
 {
     public GameObject _preFab;
-    public float _timer = 0;
+    public int _level = 0;
     public float _spawnRate;
+    public int _maxLevel = 2;
 }
 
 public struct ESpawn : IComponentData
 {
     public Entity preFab;
     public float spawnRate;
-    public float timer;
+    public float level;
+    public int maxLevel;
 }
 
 public class ESpawnBaker : Baker<ESpawnTag>
@@ -23,7 +25,8 @@ public class ESpawnBaker : Baker<ESpawnTag>
         AddComponent(entity, new ESpawn
         {
             spawnRate = authoring._spawnRate,
-            timer = authoring._timer,
+            level = authoring._level,
+            maxLevel = authoring._maxLevel,
             preFab = GetEntity(authoring._preFab, TransformUsageFlags.Dynamic)
         });
 

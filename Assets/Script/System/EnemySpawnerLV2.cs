@@ -4,13 +4,13 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 
-public partial struct EnemySpawner : ISystem
+public partial struct EnemySpawnerLV2 : ISystem
 {
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
         var spawner = SystemAPI.GetSingletonRW<ESpawn>();
-        if (spawner.ValueRO.level !=1) return;
+        if (spawner.ValueRO.level != 2) return;
         state.Enabled = false;
         var enemy = spawner.ValueRO.preFab;
         var ecb = new EntityCommandBuffer(Allocator.TempJob);
