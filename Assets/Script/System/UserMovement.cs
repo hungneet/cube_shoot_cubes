@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Unity.Entities;
 using Unity.Burst;
-using System;
-using Unity.Transforms; 
+using Unity.Entities;
 using Unity.Mathematics;
-using Unity.Collections;
+using Unity.Transforms;
+using UnityEngine;
 
 /*public partial struct MovingJob:IJobEntity
 {
@@ -14,16 +10,16 @@ using Unity.Collections;
 }*/
 public partial struct UserMovement : ISystem
 {
-    
+
 
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
         var world = state.World.Unmanaged;
         float deltaTime = SystemAPI.Time.DeltaTime;
-        foreach (var (transform,user) in SystemAPI.Query<RefRW<LocalTransform>, RefRW<User>>())
+        foreach (var (transform, user) in SystemAPI.Query<RefRW<LocalTransform>, RefRW<User>>())
         {
-           
+
             float speed = 5f;
             if (Input.GetKey(KeyCode.UpArrow))
             {
@@ -43,7 +39,7 @@ public partial struct UserMovement : ISystem
                 transform.ValueRW.Position.x += deltaTime * speed;
             }
 
-            if( user.ValueRW.timer < user.ValueRW.spawnRate)
+            if (user.ValueRW.timer < user.ValueRW.spawnRate)
             {
                 user.ValueRW.timer += deltaTime;
             }
@@ -61,10 +57,10 @@ public partial struct UserMovement : ISystem
                 });
                 state.EntityManager.Instantiate(bulletspawn);
                 user.ValueRW.timer = 0;
-             
+
             }
         }
     }
 
-   
+
 }

@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Unity.Entities;
+using UnityEngine;
 
 public class UserTag : MonoBehaviour
 {
@@ -11,7 +9,7 @@ public class UserTag : MonoBehaviour
     public int _hp;
 }
 
-public struct User:IComponentData
+public struct User : IComponentData
 {
     public Entity preFab;
     public float spawnRate;
@@ -25,11 +23,13 @@ public class UserBaker : Baker<UserTag>
     public override void Bake(UserTag authoring)
     {
         var entity = GetEntity(TransformUsageFlags.Dynamic);
-        AddComponent(entity, new User { 
+        AddComponent(entity, new User
+        {
             spawnRate = authoring._spawnRate,
             timer = authoring._timer,
             hp = authoring._hp,
-            preFab = GetEntity(authoring._preFab, TransformUsageFlags.Dynamic)});
+            preFab = GetEntity(authoring._preFab, TransformUsageFlags.Dynamic)
+        });
 
     }
 }

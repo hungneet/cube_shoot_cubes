@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Unity.Entities;
 using Unity.Burst;
-using System;
-using Unity.Transforms;
-using Unity.Mathematics;
 using Unity.Collections;
+using Unity.Entities;
+using Unity.Mathematics;
+using Unity.Transforms;
 
 
 public partial struct EnemySpawner : ISystem
@@ -25,8 +21,9 @@ public partial struct EnemySpawner : ISystem
         //state.EntityManager.SetComponentData()
         for (int i = 0; i < 100; i++)
         {
-            var newEnemy= ecb.Instantiate(enemy);
-            ecb.SetComponent(newEnemy, new LocalTransform { 
+            var newEnemy = ecb.Instantiate(enemy);
+            ecb.SetComponent(newEnemy, new LocalTransform
+            {
                 Position = new float3(random.NextFloat(-15f, 20f), 0, random.NextFloat(-2f, 10f)),
                 Rotation = quaternion.identity,
                 Scale = 0.5f

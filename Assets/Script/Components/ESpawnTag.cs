@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
 
@@ -25,7 +23,7 @@ public class ESpawnBaker : Baker<ESpawnTag>
         AddComponent(entity, new ESpawn
         {
             spawnRate = authoring._spawnRate,
-            timer = authoring._timer,   
+            timer = authoring._timer,
             preFab = GetEntity(authoring._preFab, TransformUsageFlags.Dynamic)
         });
 

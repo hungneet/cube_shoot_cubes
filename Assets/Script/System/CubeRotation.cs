@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Unity.Entities;
 using Unity.Burst;
-using System;
+using Unity.Entities;
 using Unity.Transforms;
+using UnityEngine;
 
-public partial struct CubeMoveJob: IJobEntity
+public partial struct CubeMoveJob : IJobEntity
 {
     public float deltaTime;
     void Execute(ref LocalTransform transform, ref Rotate rotate)
@@ -23,9 +20,11 @@ public partial struct CubeMoveJob: IJobEntity
         };
     }
 }
-public partial struct CubeRotation : ISystem {
+public partial struct CubeRotation : ISystem
+{
     [BurstCompile]
-    public void OnUpdate(ref SystemState state) {
+    public void OnUpdate(ref SystemState state)
+    {
         /*float deltaTime = SystemAPI.Time.DeltaTime;
         foreach (var (transform,rotate) in SystemAPI.Query<RefRW<LocalTransform>,RefRW<Rotate>>()) {
             
