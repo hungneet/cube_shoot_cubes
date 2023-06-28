@@ -19,14 +19,14 @@ public partial struct EnemySpawner : ISystem
         var enemy = spawner.ValueRW.preFab;
         var ecb = new EntityCommandBuffer(Allocator.TempJob);
         //state.EntityManager.SetComponentData()
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 1; i++)
         {
             var newEnemy = ecb.Instantiate(enemy);
             ecb.SetComponent(newEnemy, new LocalTransform
             {
                 Position = new float3(random.NextFloat(-15f, 20f), 0, random.NextFloat(-2f, 10f)),
                 Rotation = quaternion.identity,
-                Scale = 0.5f
+                Scale = 1f
             });
         }
         ecb.Playback(state.EntityManager);

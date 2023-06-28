@@ -20,7 +20,7 @@ public partial struct UserMovement : ISystem
         foreach (var (transform, user) in SystemAPI.Query<RefRW<LocalTransform>, RefRW<User>>())
         {
 
-            float speed = 5f;
+            float speed = 15f;
             if (Input.GetKey(KeyCode.UpArrow))
             {
                 transform.ValueRW.Position.z += deltaTime * speed;

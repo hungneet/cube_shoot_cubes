@@ -6,15 +6,15 @@ using UnityEngine;
 public partial struct CubeMoveJob : IJobEntity
 {
     public float deltaTime;
-    void Execute(ref LocalTransform transform, ref Rotate rotate)
+    void Execute(ref LocalTransform transform, ref EnemyComponent enemy)
     {
         if (Mathf.Abs(transform.Position.x) > 25)
         {
-            rotate.speed = -rotate.speed;
+            enemy.speed = -enemy.speed;
         }
         transform.Position = new Unity.Mathematics.float3
         {
-            x = transform.Position.x + rotate.speed * deltaTime,
+            x = transform.Position.x + enemy.speed * deltaTime,
             y = transform.Position.y,
             z = transform.Position.z
         };
@@ -44,5 +44,6 @@ public partial struct CubeRotation : ISystem
         }*/
         var moveJob = new CubeMoveJob { deltaTime = SystemAPI.Time.DeltaTime };
         moveJob.Schedule();
+        
     }
 }

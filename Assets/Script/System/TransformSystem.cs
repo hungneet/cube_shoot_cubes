@@ -15,8 +15,8 @@ namespace Systems
 			{	
 				//if abs of e.position.x > 25 change meshinfo.materialID else keep it
 				
-				meshinfo.ValueRW.MaterialID = mesh.ValueRO.materialID;
-				meshinfo.ValueRW.MeshID = mesh.ValueRO.meshID;
+				/*meshinfo.ValueRW.MaterialID = mesh.ValueRO.materialID;
+				meshinfo.ValueRW.MeshID = mesh.ValueRO.meshID;*/
 			}
 		}
 	}
