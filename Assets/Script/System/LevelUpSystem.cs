@@ -16,13 +16,13 @@ namespace Systems
                     .WithAll<EnemyComponent>()
                     .WithAll<LocalTransform>()
                     .Build(ref state);
-				UnityEngine.Debug.Log(query.CalculateEntityCount());
+				//UnityEngine.Debug.Log(query.CalculateEntityCount());
 
                 if (query.CalculateEntityCount() == 0 && spawner.ValueRO.level <= spawner.ValueRO.maxLevel )
 				{
 					spawner.ValueRW.level += 1;	
 					
-					UnityEngine.Debug.Log("level" + spawner.ValueRW.level);
+					//UnityEngine.Debug.Log("level" + spawner.ValueRW.level);
                 }
 			}
 		}
