@@ -8,7 +8,7 @@ public partial struct CubeMoveJob : IJobEntity
     public float deltaTime;
     void Execute(ref LocalTransform transform, ref EnemyComponent enemy)
     {
-        if (Mathf.Abs(transform.Position.x) >= 25)
+        if (Mathf.Abs(transform.Position.x) >= 24.5f)
         {
             enemy.speed = -enemy.speed;
         }

@@ -122,6 +122,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
+  _spawnRate: 0.5
+  _timer: 0
 --- !u!114 &8621174631017745178
 MonoBehaviour:
   m_ObjectHideFlags: 0

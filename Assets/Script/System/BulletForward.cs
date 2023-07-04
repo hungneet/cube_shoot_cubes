@@ -4,18 +4,6 @@ using Unity.Entities;
 using Unity.Transforms;
 
 [BurstCompile]
-public partial struct BForwardJob : IJobEntity
-{
-    public float deltaTime;
-    public float speed;
-    //Ref: RW, in: RO
-    void Execute(ref LocalTransform transform, in Bullet bl)
-    {
-
-        transform.Position.z += speed * deltaTime;
-    }
-
-}
 
 public partial struct BulletForward : ISystem
 {
@@ -26,19 +14,14 @@ public partial struct BulletForward : ISystem
 
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
-    {   
-        new BForwardJob { deltaTime = SystemAPI.Time.DeltaTime, speed = 10f }.Schedule();
-        state.Dependency.Complete();
-        DestroyBullet(ref state);
-
-    }
-
-    private void DestroyBullet(ref SystemState state)
-    {
+    {   var deltaTime = SystemAPI.Time.DeltaTime;
         var ecb = new EntityCommandBuffer(Allocator.TempJob);
 
-        foreach (var (bullet, tf, entity) in SystemAPI.Query<RefRO<Bullet>, RefRO<LocalTransform>>().WithEntityAccess())
+        foreach (var (bullet, tf, entity) in SystemAPI.Query<RefRO<Bullet>, RefRW<LocalTransform>>().WithEntityAccess())
         {
+            float speed = 10f;
+            float direction = tf.ValueRO.Forward().z;
+            tf.ValueRW.Position.z += speed*deltaTime*direction;
             if (tf.ValueRO.Position.z > 20)
             {
                 ecb.DestroyEntity(entity);
@@ -46,6 +29,9 @@ public partial struct BulletForward : ISystem
         }
         ecb.Playback(state.EntityManager);
         ecb.Dispose();
+
     }
+
+  
 }
 
