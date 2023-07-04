@@ -11,6 +11,10 @@ using UnityEngine;
 public partial struct UserMovement : ISystem
 {
 
+    void OnCreate(ref SystemState state)
+    {
+        state.RequireForUpdate<StartGameCommand>();
+    }
 
     [BurstCompile]
     public void OnUpdate(ref SystemState state)

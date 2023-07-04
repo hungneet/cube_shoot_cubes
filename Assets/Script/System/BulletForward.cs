@@ -19,7 +19,10 @@ public partial struct BForwardJob : IJobEntity
 
 public partial struct BulletForward : ISystem
 {
-
+    void OnCreate(ref SystemState state)
+    {
+        state.RequireForUpdate<StartGameCommand>();
+    }
 
     [BurstCompile]
     public void OnUpdate(ref SystemState state)

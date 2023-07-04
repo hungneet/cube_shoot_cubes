@@ -22,6 +22,11 @@ public partial struct CubeMoveJob : IJobEntity
 }
 public partial struct CubeRotation : ISystem
 {
+    void OnCreate(ref SystemState state)
+    {
+        state.RequireForUpdate<StartGameCommand>();
+    }
+
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {

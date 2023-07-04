@@ -8,7 +8,11 @@ namespace Systems
 {
 	public partial struct LevelUpSystem : ISystem
 	{
-		public void OnUpdate(ref SystemState state)
+        void OnCreate(ref SystemState state)
+        {
+            state.RequireForUpdate<StartGameCommand>();
+        }
+        public void OnUpdate(ref SystemState state)
 		{
 			foreach (var (spawner, e) in SystemAPI.Query<RefRW<ESpawn>>().WithEntityAccess())
 			{

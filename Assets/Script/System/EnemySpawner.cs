@@ -6,6 +6,10 @@ using Unity.Transforms;
 
 public partial struct EnemySpawner : ISystem
 {
+    void OnCreate(ref SystemState state)
+    {
+        state.RequireForUpdate<StartGameCommand>();
+    }
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
@@ -20,7 +24,7 @@ public partial struct EnemySpawner : ISystem
             var newEnemy = ecb.Instantiate(enemy);
             ecb.SetComponent(newEnemy, new LocalTransform
             {
-                Position = new float3(random.NextFloat(-15f, 20f), 0, random.NextFloat(-2f, 10f)),
+                Position = new float3(random.NextFloat(-20f,20f),0f,random.NextFloat(-2f,10f)),
                 Rotation = quaternion.identity,
                 Scale = 1f
             });
